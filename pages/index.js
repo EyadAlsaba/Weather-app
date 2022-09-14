@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="w-2/4 h-screen">
-      <h1 className="text-blueMe">testing</h1>
-    </div>
+    <>
+      <p>{" "}</p>
+    </>
   )
 }

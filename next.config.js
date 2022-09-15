@@ -6,11 +6,14 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/home/',
+        destination: '/home',
         permanent: true,
       },
     ]
   },
+  env: {
+    API_KEY: '1e4230fe055eddcdc467e6d28cd39619'
+  }
 }
 
 module.exports = nextConfig

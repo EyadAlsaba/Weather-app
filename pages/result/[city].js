@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getData } from "../../utils/handlers";
+import HomeIcon from './component/HomeSVG'
 
 export default function WeatherInfo() {
   const { query } = useRouter();
@@ -17,7 +17,7 @@ export default function WeatherInfo() {
 
   if (data) {
     const cityInfo = {
-      'city name': data.name,
+      'cityName': data.name,
       'temperature': data.main.temp,
       'description': data.weather[0].description,
       'sunrise': data.sys.sunrise,
@@ -28,10 +28,10 @@ export default function WeatherInfo() {
     }
 
     return (
-      <>
+      <div className='w-full h-screen bg-gray-100'>
         <h4>{query.city}</h4>
-        <Link href='/home'>home</Link>
-      </>
+        <HomeIcon />
+      </div>
     )
   }
 }

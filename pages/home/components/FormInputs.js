@@ -20,7 +20,7 @@ export default function Form() {
 
   return (
     <>
-      <div className="relative mx-auto top-1/2 w-2/3 lg:w-1/2">
+      <div className="relative mx-auto top-1/2 w-2/3 lg:w-1/3">
         {
           invalid && <p className="block absolute bottom-full rounded-sm py-1  bg-blackBackground text-center text-red-500 uppercase">
             city name must not contain numbers, spaces, or character %$#@!*_^
@@ -33,7 +33,7 @@ export default function Form() {
             </div>
             <input type='text'
               placeholder="city name"
-              className="capitalize w-full bg-inherit placeholder:text-blueMe focus:outline-none text-blueMe"
+              className="capitalize w-full bg-inherit placeholder:text-blueMe focus:outline-none text-blueMe md:text-lg text-sm"
               onChange={(e) => setCity(e.target.value)}
               required
             />

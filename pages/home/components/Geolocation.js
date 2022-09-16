@@ -36,11 +36,11 @@ export default function GeolocationBtn() {
 
   return (
     <>
-      <div className="bg-blueMe py-3 rounded-b flex flex-row hover:opacity-75 transition-all delay-200">
+      <div className="bg-blueMe py-3 rounded-b flex flex-row transition-all delay-200 hover:opacity-75 ">
         <div className="w-8 ml-4">
           <GeolocationSVG />
         </div>
-        <button className="capitalize text-grayMe"
+        <button className="capitalize text-grayMe md:text-lg text-sm  w-full text-start"
           onClick={() => userGeolocation()}
         >
           current location

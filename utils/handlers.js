@@ -16,11 +16,4 @@ export async function getData(query) {
     const data = await response.json();
     return data
   };
-
-  // if (Object.hasOwn('lat', query)) {
-  //   const geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${query.lat}&lon=${query.lon}&appid=${process.env.API_KEY}`
-  //   const response = await fetch(geoUrl);
-  //   const data = await response.json();
-  // }
-
 }

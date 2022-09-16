@@ -1,8 +1,14 @@
 import GeolocationSVG from "./GeoLocSVG"
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function GeolocationBtn() {
   const router = useRouter();
+  const [fail, setFail] = useState(false);
+
+  // useEffect(() => {
+  //   setTimeout(() => setFail(false), 5000)
+  // }, []);
 
   function userGeolocation() {
     if (navigator.geolocation) {
@@ -22,19 +28,28 @@ export default function GeolocationBtn() {
   };
 
   function errorCallBack(error) {
-    return error
+    if (error) {
+      setFail(true);
+      setTimeout(() => setFail(false), 3000)
+    }
   }
 
   return (
-    <div className="bg-blueMe py-3 rounded-b flex flex-row hover:opacity-75 transition-all delay-200">
-      <div className="w-8 ml-4">
-        <GeolocationSVG />
+    <>
+      <div className="bg-blueMe py-3 rounded-b flex flex-row hover:opacity-75 transition-all delay-200">
+        <div className="w-8 ml-4">
+          <GeolocationSVG />
+        </div>
+        <button className="capitalize text-grayMe"
+          onClick={() => userGeolocation()}
+        >
+          current location
+        </button>
       </div>
-      <button className="capitalize text-grayMe"
-        onClick={() => userGeolocation()}
-        title='please remember to enable your location'>
-        use your current location
-      </button>
-    </div>
+      {
+        fail && <p className="block text-center uppercase bg-blackBackground rounded-b py-2 text-red-500">
+          please enable your location</p>
+      }
+    </>
   )
 }

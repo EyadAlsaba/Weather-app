@@ -7,29 +7,40 @@ import GeolocationBtn from "./Geolocation";
 export default function Form() {
   const router = useRouter();
   const [city, setCity] = useState('');
+  const [invalid, setInvalid] = useState(false);
 
   function submitHandler(e) {
     e.preventDefault();
-    inputValidator(city) ? router.push(`/result/${city}`) : false;
+    inputValidator(city) ?
+      router.push(`/result/${city}`)
+      :
+      setInvalid(true);
+    setTimeout(() => setInvalid(false), 5000)
   }
 
   return (
-    <div className="w-1/3 relative top-[460px] mx-auto">
-      <form onSubmit={submitHandler}>
-        <div className="bg-grayMe py-3 rounded-t flex flex-row">
-          <div className="w-8 ml-4">
-            <SearchSVG />
+    <>
+      <div className="relative mx-auto top-1/2 w-2/3 lg:w-1/2">
+        {
+          invalid && <p className="block absolute bottom-full rounded-sm py-1  bg-blackBackground text-center text-red-500 uppercase">
+            city name must not contain numbers, spaces, or character %$#@!*_^
+          </p>
+        }
+        <form onSubmit={submitHandler}>
+          <div className="bg-grayMe py-3 rounded-t flex flex-row">
+            <div className="w-8 ml-4">
+              <SearchSVG />
+            </div>
+            <input type='text'
+              placeholder="city name"
+              className="capitalize w-full bg-inherit placeholder:text-blueMe focus:outline-none text-blueMe"
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
           </div>
-          <input type='text'
-            placeholder="city name"
-            className="capitalize w-full bg-inherit placeholder:text-blueMe focus:outline-none text-blueMe"
-            title="city name must not contain numbers, start/end with space or any character %$#@!*_^"
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </div>
-      </form>
-      <GeolocationBtn />
-    </div>
+        </form>
+        <GeolocationBtn />
+      </div>
+    </>
   )
 }

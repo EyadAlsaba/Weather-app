@@ -1,7 +1,7 @@
 import Link from "next/link"
 export default function HomeIcon() {
   return (
-    <div className="hover:cursor-pointer transition-[width] ease-linear duration-1000 bg-blackBackground rounded-full w-fit absolute right-0 bottom-0 m-2 p-1 hover:text-slate-500
+    <div className="hover:cursor-pointer transition-[width] ease-linear duration-500 bg-blackBackground rounded-full w-fit absolute right-0 bottom-0 m-2 p-1
      md:hover:w-10 md:m-0 md:h-fit md:w-7 md:rounded-r md:top-1/2">
       <Link href='/home' className="hover:pl-10">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white ">

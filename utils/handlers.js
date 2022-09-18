@@ -11,7 +11,7 @@ export function inputValidator(query) {
 
 export async function getData(query) {
   if (typeof query === 'string') {
-    const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${process.env.API_KEY}`;
+    const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
     const response = await fetch(cityUrl);
     const data = await response.json();
     return data

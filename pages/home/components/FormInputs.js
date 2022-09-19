@@ -1,30 +1,39 @@
 import { useState } from "react";
-import { inputValidator } from "../../../utils/handlers";
+import { getData } from "../../../utils/handlers";
 import { useRouter } from "next/router";
 import SearchSVG from "./SearchSVG"
 import GeolocationBtn from "./Geolocation";
 
 export default function Form() {
+
   const router = useRouter();
   const [city, setCity] = useState('');
   const [invalid, setInvalid] = useState(false);
+  const [msg, setMsg] = useState('');
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
-    inputValidator(city) ?
-      router.push(`/result/${city}`)
-      :
+    const docs = await getData(city);
+    if (docs === undefined) {
       setInvalid(true);
+      setMsg('city name must not contain numbers, spaces, or character %$#@!*_^')
+    } else {
+      if (docs.cod === 200) {
+        router.push(`/result/${city}`);
+      }
+      if (docs.cod === '404') {
+        setInvalid(true);
+        setMsg(`no results for "${city}"`);
+      }
+    };
     setTimeout(() => setInvalid(false), 5000)
   }
 
   return (
     <>
-      <div className="relative mx-auto top-1/2 w-2/3 lg:w-1/3">
+      <div className="relative mx-auto top-1/2 w-2/3 md:w-2/5 lg:w-1/4">
         {
-          invalid && <p className="block absolute bottom-full rounded-sm py-1  bg-blackBackground text-center text-red-500 uppercase">
-            city name must not contain numbers, spaces, or character %$#@!*_^
-          </p>
+          invalid && <p className="block absolute bottom-full rounded-sm py-1 w-full bg-blackBG text-center text-red-500 uppercase md:text-xl">{msg}</p>
         }
         <form onSubmit={submitHandler}>
           <div className="bg-grayMe py-3 rounded-t flex flex-row">

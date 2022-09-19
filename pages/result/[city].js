@@ -34,22 +34,24 @@ export default function WeatherInfo() {
         <HomeIcon />
         <div className='w-full h-screen bg-lightBlue'>
           <section className="relative top-20">
-            <h1 className=" bg-blackBackground text-white mx-auto p-3 rounded h-fit w-fit  text-2xl tracking-normal text-center">
+            <h1 className=" bg-blackBG  text-white mx-auto p-3 rounded h-fit w-fit text-2xl  md:text-3xl tracking-normal text-center">
               {cityInfo.cityName} | {cityInfo.country}
             </h1>
-            <div className="w-full flex justify-center pt-3  items-center">
+            <div className="w-full flex justify-center pt-3 items-center">
               <img src={cityInfo.iconSrc} alt='weather icon' />
-              <p className="text-2xl px-1 text-white w-fit">
+              <p className="px-1 drop-shadow-md text-white w-fit text-base md:text-2xl">
                 {cityInfo.temperature}
-                <span className="p-1">°C</span>
+                <span className="p-1 drop-shadow-md text-base md:text-2xl">°C</span>
               </p>
             </div>
           </section>
           <section className="w-full relative top-20 capitalize">
-            <p className="text-white mx-auto text-center">{cityInfo.description}</p>
+            <p className="text-white mx-auto text-center drop-shadow-md text-base md:text-xl">
+              {cityInfo.description}
+            </p>
           </section>
-          <section className="relative top-60 py-2">
-            <div className="bg-blackBackground flex justify-evenly items-center">
+          <section className="relative top-1/3 md:mt-40 py-2">
+            <div className="bg-blackBG flex justify-evenly items-center md:text-xl">
               <div className="text-center py-2 text-white">
                 <p className="capitalize my-1">sunrise</p>
                 <p>{cityInfo.sunrise}</p>
@@ -60,11 +62,11 @@ export default function WeatherInfo() {
               </div>
             </div>
           </section>
-          <section className="relative top-60 py-2">
-            <div className="bg-blackBackground flex justify-evenly items-center">
+          <section className="relative top-1/3 py-2">
+            <div className="bg-blackBG flex justify-evenly items-center md:text-xl">
               <div className="text-center py-2 text-white">
-                <p className=" capitalize my-1">humidity</p>
-                <p className="text-white">{cityInfo.humidity}%</p>
+                <p className=" capitalize my-1 drop">humidity</p>
+                <p className="text-white drop">{cityInfo.humidity}%</p>
               </div>
               <div className="text-center py-2 text-white">
                 <p className="capitalize my-1">pressure</p>

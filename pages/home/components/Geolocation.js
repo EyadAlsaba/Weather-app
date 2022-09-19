@@ -47,7 +47,7 @@ export default function GeolocationBtn() {
         </button>
       </div>
       {
-        fail && <p className="block text-center uppercase bg-blackBackground rounded-b py-2 text-red-500">
+        fail && <p className="block text-center uppercase bg-blackBG rounded-b py-2 text-red-500">
           please enable your location</p>
       }
     </>

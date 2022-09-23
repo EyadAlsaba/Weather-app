@@ -1,7 +1,9 @@
-export default function Home() {
+import Form from "./home/components/FormInputs.js"
+
+export default function HomePage() {
   return (
-    <>
-      <p>{" "}</p>
-    </>
+    <div className="w-screen h-screen bg-homePage bg-cover bg-no-repeat ">
+      <Form />
+    </div>
   )
 }

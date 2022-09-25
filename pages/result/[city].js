@@ -29,6 +29,7 @@ export default function WeatherInfo() {
       'humidity': data.main.humidity,
       'iconSrc': `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
     }
+    
     return (
       <>
         <HomeIcon />

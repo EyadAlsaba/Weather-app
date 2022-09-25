@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { getData } from "../../utils/handlers";
 import HomeIcon from './component/HomeSVG'
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default function WeatherInfo() {
   const { query } = useRouter();
   const [data, setData] = useState(null);
-
+  
   useEffect(() => {
     (async () => {
       const docs = await getData(query.city)
@@ -16,15 +16,15 @@ export default function WeatherInfo() {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data == null, query.city]);
-
+  
   if (data) {
     const cityInfo = {
       'cityName': data.name,
       'country': data.sys.country,
       'temperature': data.main.temp.toFixed(),
       'description': data.weather[0].description,
-      'sunrise': moment.unix(data.sys.sunrise).format('LT'),
-      'sunset': moment.unix(data.sys.sunset).format('LT'),
+      'sunrise': dayjs.unix(data.sys.sunrise).format('HH:mm'),
+      'sunset': dayjs.unix(data.sys.sunset).format('HH:mm') ,
       'pressure': data.main.pressure,
       'humidity': data.main.humidity,
       'iconSrc': `https://openweathermap.org/img/w/${data.weather[0].icon}.png`

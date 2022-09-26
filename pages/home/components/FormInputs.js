@@ -20,7 +20,7 @@ export default function Form() {
       setMsg('city name must not contain numbers, spaces, or character %$#@!*_^')
     } else {
       if (docs.cod === 200) {
-        router.push(`/result/${city}`);
+        router.push(`result/query?lat=${docs.coord.lat}&lon=${docs.coord.lon}`);
       }
       if (docs.cod === '404') {
         setInvalid(true);

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { getData } from "../../../utils/handlers";
+import { useEffect, useState } from "react";
+import { getData, getOptions } from "../../../utils/handlers";
 import { useRouter } from "next/router";
 import SearchSVG from "./SearchSVG"
 import GeolocationBtn from "./Geolocation";
@@ -10,6 +10,7 @@ export default function Form() {
   const [city, setCity] = useState('');
   const [invalid, setInvalid] = useState(false);
   const [msg, setMsg] = useState('');
+  const [opt, setOpt] = useState(null);
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -28,6 +29,15 @@ export default function Form() {
     };
     setTimeout(() => setInvalid(false), 5000)
   }
+
+  useEffect(() => {
+    if (city.length !== 0) {
+      (async () => {
+        const options = await getOptions(city);
+        setOpt(options);
+      })()
+    }
+  }, [city])
 
   return (
     <>
@@ -48,6 +58,19 @@ export default function Form() {
             />
           </div>
         </form>
+        <div className="w-full">
+          {
+            (opt && city.length !== 0) && opt.map((option, index) => {
+              return (
+                <button className="w-full bg-grayMe text-blueMe border-b-4 py-1 hover:bg-blueMe hover:text-grayMe md:text-lg text-sm"
+                  key={index}
+                  onClick={() => router.push(`result/query?lat=${option.lat}&lon=${option.lon}`)}
+                >
+                  {option.name}, {option.state ? `${option.state},` : null} {option.country}</button>
+              )
+            })
+          }
+        </div>
         <GeolocationBtn />
       </div>
     </>

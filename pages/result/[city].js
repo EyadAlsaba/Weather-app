@@ -1,22 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { getData } from "../../utils/handlers";
+import { getData, getCoordinates } from "../../utils/handlers";
 import HomeIcon from './component/HomeSVG'
 import dayjs from "dayjs";
 
 export default function WeatherInfo() {
   const { query } = useRouter();
   const [data, setData] = useState(null);
-  
+  const lat = Number(query.lat);
+  const lon = Number(query.lon);
+
   useEffect(() => {
     (async () => {
-      const docs = await getData(query.city)
-      setData(docs);
+      if (!Object.hasOwn(query, 'lat')) {
+        const docs = await getData(query.city);
+        setData(docs)
+      };
+
+      if (Object.hasOwn(query, 'lat')) {
+        const docs = await getCoordinates({ lat, lon });
+        setData(docs)
+      };
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data == null, query.city]);
-  
+  }, [data == null, !isNaN(lat), query.city]);
+
   if (data) {
     const cityInfo = {
       'cityName': data.name,
@@ -24,12 +33,12 @@ export default function WeatherInfo() {
       'temperature': data.main.temp.toFixed(),
       'description': data.weather[0].description,
       'sunrise': dayjs.unix(data.sys.sunrise).format('HH:mm'),
-      'sunset': dayjs.unix(data.sys.sunset).format('HH:mm') ,
+      'sunset': dayjs.unix(data.sys.sunset).format('HH:mm'),
       'pressure': data.main.pressure,
       'humidity': data.main.humidity,
       'iconSrc': `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
     }
-    
+
     return (
       <>
         <HomeIcon />

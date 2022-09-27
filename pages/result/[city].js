@@ -6,36 +6,47 @@ import dayjs from "dayjs";
 import HumidityAndPressure from './component/HandP';
 import SunInfo from './component/SunInfo';
 import HeaderInfo from './component/HeaderInfo';
+import Forecast from "./component/Forecast";
 
 export default function WeatherInfo() {
   const { query } = useRouter();
   const [data, setData] = useState(null);
+  const [geoInfo, setInfo] = useState(null);
   const lat = Number(query.lat);
   const lon = Number(query.lon);
 
   useEffect(() => {
     (async () => {
       if (Object.hasOwn(query, 'lat')) {
-        const docs = await getCoordinates({ lat, lon });
-        setData(docs)
+        const geoDocs = await getCoordinates({ lat, lon });
+        setInfo(geoDocs);
       };
-    })();
+      const res = await fetch('http://localhost:3000/api/getPLH');
+      const oneCallDocs = await res.json();
+      setData(oneCallDocs);
+      // console.log(oneCallDocs)
+    })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data == null, !isNaN(lat)]);
+  }, [geoInfo == null, data == null, !isNaN(lat)]);
 
-  if (data) {
+  if (geoInfo && data) {
     const cityInfo = {
-      'cityName': data.name,
-      'country': data.sys.country,
-      'temperature': data.main.temp.toFixed(),
-      'description': data.weather[0].description,
-      'sunrise': dayjs.unix(data.sys.sunrise).format('HH:mm'),
-      'sunset': dayjs.unix(data.sys.sunset).format('HH:mm'),
-      'pressure': data.main.pressure,
-      'humidity': data.main.humidity,
-      'iconSrc': `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
+      'cityName': geoInfo.name,
+      'country': geoInfo.sys.country,
+      'temperature': geoInfo.main.temp.toFixed(),
+      'description': geoInfo.weather[0].description,
+      'sunrise': dayjs.unix(geoInfo.sys.sunrise).format('HH:mm'),
+      'sunset': dayjs.unix(geoInfo.sys.sunset).format('HH:mm'),
+      'pressure': geoInfo.main.pressure,
+      'humidity': geoInfo.main.humidity,
+      'iconSrc': `https://openweathermap.org/img/w/${geoInfo.weather[0].icon}.png`
     }
-
+    const foreCast = {
+      datum: dayjs.unix(data.daily[5].dt).toString().slice(0, 11),
+      desc: data.daily[0].weather[0].description,
+      min: data.daily[0].temp.min.toFixed(),
+      max: data.daily[0].temp.max.toFixed()
+    }
     return (
       <>
         <HomeIcon />
@@ -43,8 +54,29 @@ export default function WeatherInfo() {
           <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description }} />
           <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset }} />
           <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
+          <div id='forecaster' className="flex justify-center text-white bg-blackBG">
+            {
+              data && data.daily.map((day, index) => {
+                return (
+                  <div key={index} className='mx-1 w-fit'>
+                    <Forecast day={day} />
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
       </>
     )
   }
 }
+
+  // useEffect(() => {
+  //   (async () => {
+  //     if (Object.hasOwn(query, 'lat')) {
+  //       const docs = await getCoordinates({ lat, lon });
+  //       setData(docs)
+  //     };
+  //   })();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data == null, !isNaN(lat)]);

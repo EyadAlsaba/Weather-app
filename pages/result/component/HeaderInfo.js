@@ -1,5 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import Lottie from 'react-lottie';
+import partlyRain from './lotties/Rain.json'
+
 export default function HeaderInfo({ props }) {
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: partlyRain,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
   return (
     <>
       <section className="relative top-20">
@@ -7,7 +19,14 @@ export default function HeaderInfo({ props }) {
           {props.name} | {props.country}
         </h1>
         <div className="w-full flex justify-center pt-3 items-center">
-          <img src={props.icon} alt='weather icon' />
+          {/* <img src={props.icon} alt='weather icon' /> */}
+          <div id='partlyRain' className="">
+            <Lottie
+              options={defaultOptions}
+              height={60}
+              width={60}
+            />
+          </div>
           <p className="px-1 drop-shadow-md text-white w-fit text-base md:text-2xl">
             {props.temp}
             <span className="p-1 drop-shadow-md text-base md:text-2xl">°C</span>

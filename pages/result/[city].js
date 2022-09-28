@@ -50,21 +50,27 @@ export default function WeatherInfo() {
     return (
       <>
         <HomeIcon />
-        <div className='w-full h-screen bg-lightBlue'>
+        <div className='w-full h-full'>
           <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description }} />
-          <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset }} />
-          <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
-          <div id='forecaster' className="flex justify-center text-white bg-blackBG">
-            {
-              data && data.daily.map((day, index) => {
-                return (
-                  <div key={index} className='mx-1 w-fit'>
-                    <Forecast day={day} />
-                  </div>
-                )
-              })
-            }
+          <div className="flex relative top-24 justify-center">
+            <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset }} />
+            <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
           </div>
+
+          <section className="relative top-48 h-full mt-10">
+            <div id='forecaster' className="flex justify-center flex-col md:w-9/12 mx-auto rounded-md text-white bg-blackBG px-5">
+              {
+                data && data.daily.map((day, index) => {
+                  return (
+                    <div key={index} className='border-b-2 py-2'>
+                      <Forecast day={day} />
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </section>
+
         </div>
       </>
     )

@@ -35,7 +35,7 @@ yarn-error.log*
 notes.txt
 
 #placeholder data
-PLH.js
+#PLH.js
 
 # typescript
 *.tsbuildinfo

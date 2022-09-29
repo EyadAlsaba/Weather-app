@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getData, getOptions } from "../../../utils/handlers";
+import { getCityInfo, getOptions } from "../../../utils/handlers";
 import { useRouter } from "next/router";
 import SearchSVG from "./SearchSVG"
 import GeolocationBtn from "./Geolocation";
@@ -66,7 +66,7 @@ export default function Form() {
                   key={index}
                   onClick={() => router.push(`result/query?lat=${option.lat}&lon=${option.lon}`)}
                 >
-                  {option.name}, {option.state ? `${option.state},` : null} {option.country}</button>
+                  {option.name}, {option.state && `${option.state},`} {option.country}</button>
               )
             })
           }

@@ -17,7 +17,16 @@ export async function getOptions(query) {
   return options
 }
 
-export async function getData(query) {
+export async function getCityInfo(query) {
+  if (query !== undefined) {
+      const cityUrl =
+        `https://api.openweathermap.org/data/2.5/weather?lat=${query.lat}&lon=${query.lon}&units=metric&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+      const response = await fetch(cityUrl);
+      const data = await response.json();
+      return data
+  }
+}
+export async function getQueryName(query){
   if (query !== undefined) {
     const isValid = inputValidator(query);
     if (isValid) {
@@ -29,11 +38,10 @@ export async function getData(query) {
     };
   }
 }
-
 export async function getCoordinates(coords) {
   if (!isNaN(coords.lat) && !isNaN(coords.lon)) {
     const cityUrl =
-      `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
     const response = await fetch(cityUrl);
     const data = await response.json();
     return data

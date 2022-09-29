@@ -1,38 +1,25 @@
 import dayjs from "dayjs"
 import { IconContext } from "react-icons";
 import { VscArrowSmallDown, VscArrowSmallUp } from 'react-icons/vsc'
-import Lottie from 'react-lottie';
-import partlyRain from './lotties/Rain.json'
-
-//https://openweathermap.org/weather-conditions
+import Animation from './Animation'
 
 export default function Forecast({ day }) {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: partlyRain,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
-  };
 
+  const weatherID = day.weather[0].id;
   return (
-    <section className="flex justify-between items-center ">
+    <section className="flex justify-between items-center">
+
       <div className="w-fit text-xs md:text-sm lg:text-lg">
         <p>
           {dayjs.unix(day.dt).toString().slice(0, 11)}
         </p>
       </div>
+
       <div className="flex justify-center items-center  w-fit text-xs md:text-sm lg:text-lg w-inherit">
-        <div id='partlyRain' className="mx-1">
-          <Lottie
-            options={defaultOptions}
-            height={60}
-            width={60}
-          />
-        </div>
+        <Animation weatherId={weatherID}/>
         <p className="">{day.weather[0].description}</p>
       </div>
+      
       <div className="w-fit flex justify-center  align-middle items-center text-xs md:text-sm lg:text-lg">
 
         <div className="flex justify-start mx-1 w-20">

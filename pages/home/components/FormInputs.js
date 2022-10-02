@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCityInfo, getOptions } from "../../../utils/handlers";
+import { getCurrentData, getOptions } from "../../../utils/handlers";
 import { useRouter } from "next/router";
 import SearchSVG from "./SearchSVG"
 import GeolocationBtn from "./Geolocation";
@@ -14,7 +14,7 @@ export default function Form() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    const docs = await getData(city);
+    const docs = await getCurrentData(city);
     if (docs === undefined) {
       setInvalid(true);
       setMsg('city name must not contain numbers, spaces, or character %$#@!*_^')

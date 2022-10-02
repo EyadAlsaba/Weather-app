@@ -16,23 +16,17 @@
 html,
 body {
   font-family: "Poppins", sans-serif;
-  width: 100vw;
   height: 100vh;
-  background-color: #d1d6dc;
+  background-color: rgb(71 85 105);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  /* outline: 1px solid red; */
 }
 
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */
+div[role="button"] {
+  cursor: auto;
+}

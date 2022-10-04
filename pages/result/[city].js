@@ -5,27 +5,27 @@ import { useState } from 'react';
 import Error from '../404'
 import HomeIcon from './component/HomeSVG'
 import dayjs from "dayjs";
-import HumidityAndPressure from './component/HandP';
+import HumidityAndPressure from './component/HumidityAndPressure';
 import SunInfo from './component/SunInfo';
 import HeaderInfo from './component/HeaderInfo';
 import Forecast from "./component/Forecast";
-import Settings from './component/SettingSVG'
 import Animation from './component/Animation';
+import Modal from './component/ConfigModal';
 
 export default function WeatherInfo() {
   const { query } = useRouter();
   const lat = Number(query.lat);
   const lon = Number(query.lon);
-  const [unitOpt, setUnitOpt] = useState(false);
+  const [config, setConfig] = useState({ tz: '', tf: '', ud: '' });
 
   let reverseGeoURL;
   let oneCallURL;
 
   if (!isNaN(lat)) {
     reverseGeoURL =
-      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&units=${unitOpt}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&units=${config.ud}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
     oneCallURL =
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unitOpt}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${config.ud}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
   }
 
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
@@ -72,9 +72,9 @@ export default function WeatherInfo() {
               }
             </div>
           </section>
-          <section className='relative h-12 w-full my-5 md:m-0  md:absolute lg:top-64 md:top-52'>
+          <section className='relative h-12 w-full my-5 md:m-0  md:absolute md:top-48'>
             <HomeIcon />
-            <Settings />
+            <Modal props={{ config, setConfig }} />
           </section>
         </div>
       </>
@@ -86,7 +86,7 @@ export default function WeatherInfo() {
   } else {
     return (
       <div className='mt-24'>
-        <Animation animationProps={{ id: 100, w: 350, h: 350 }} />
+        <Animation animationProps={{ id: 100, w: 300, h: 300 }} />
       </div>
     )
   }

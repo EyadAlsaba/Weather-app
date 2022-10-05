@@ -2,24 +2,10 @@ import SettingsBtn from "./SettingSVG"
 import Toggle from './Toggle'
 
 export default function Modal({ props }) {
-  const { setConfig } = props;
+  const { config,setConfig } = props;
 
   function applyConfigs() {
     document.getElementById('modal').style.display = 'none'
-    const options = document.querySelectorAll('input');
-    const userConfig = {};
-    options.forEach((opt, index) => {
-      if (index == 0) {
-        opt.checked ? userConfig.tz = true : userConfig.tz = false
-      }
-      if (index == 1) {
-        opt.checked ? userConfig.tf = true : userConfig.tf = false
-      }
-      if (index == 2) {
-        opt.checked ? userConfig.ud = true : userConfig.ud = false
-      }
-    })
-    setConfig(userConfig)
   }
 
   return (
@@ -44,17 +30,17 @@ export default function Modal({ props }) {
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>timezone</span>
-            <Toggle />
+            <Toggle prop={{id:'tz',handler:setConfig}}/>
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>24/12</span>
-            <Toggle />
+            <Toggle prop={{id:'tf',handler:setConfig}}/>
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>°c/°f</span>
-            <Toggle />
+            <Toggle prop={{id:'ud',handler:setConfig}}/>
           </div>
 
         </div>

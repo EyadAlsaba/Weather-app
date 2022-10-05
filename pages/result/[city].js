@@ -16,16 +16,20 @@ export default function WeatherInfo() {
   const { query } = useRouter();
   const lat = Number(query.lat);
   const lon = Number(query.lon);
-  const [config, setConfig] = useState({ tz: '', tf: '', ud: '' });
-
+  const [config, setConfig] = useState({});
   let reverseGeoURL;
   let oneCallURL;
 
-  if (!isNaN(lat)) {
-    reverseGeoURL =
-      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&units=${config.ud}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
-    oneCallURL =
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${config.ud}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
+  if(typeof window !== "undefined"){
+    let userConfigs = window.sessionStorage.getItem('configs');
+    if (!isNaN(lat)) {
+      console.log(config)
+      const units = userConfigs.ud ? 'imperial' : 'metric';
+      reverseGeoURL =
+        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&units=${units}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+      oneCallURL =
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
+    }
   }
 
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
@@ -74,7 +78,7 @@ export default function WeatherInfo() {
           </section>
           <section className='relative h-12 w-full my-5 md:m-0  md:absolute md:top-48'>
             <HomeIcon />
-            <Modal props={{ config, setConfig }} />
+            <Modal props={{ setConfig }} />
           </section>
         </div>
       </>

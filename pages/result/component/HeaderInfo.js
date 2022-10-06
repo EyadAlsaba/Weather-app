@@ -12,7 +12,9 @@ export default function HeaderInfo({ props }) {
           <Animation animationProps={{ id: props.icon, w: 50, h: 50 }} />
           <p className="px-1 drop-shadow-md text-white w-fit text-lg md:text-2xl">
             {props.temp}
-            <span className="p-1 drop-shadow-md text-base md:text-2xl">°C</span>
+            <span className="p-1 drop-shadow-md text-base md:text-2xl uppercase">
+              {props.unit === 'metric' ? '°c' : '°f'}
+            </span>
           </p>
         </div>
       </section>

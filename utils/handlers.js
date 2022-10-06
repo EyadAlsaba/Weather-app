@@ -1,3 +1,26 @@
+import { useState, useEffect } from "react";
+// Reference: https://typeofnan.dev/using-session-storage-in-react-with-hooks/
+function getLocalStorageOrDefault(key, defaultValue) {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    return JSON.parse(stored);
+  }
+}
+
+function useLocalStorage(key, defaultValue) {
+  const [value, setValue] = useState(
+    getLocalStorageOrDefault(key, defaultValue)
+  );
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
+}
+
 function inputValidator(query) {
   if (query !== undefined) {
     const reg = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/gi;
@@ -47,4 +70,4 @@ const fetcherAsync = async url => {
   return res.json()
 }
 
-export { getCurrentData, getOptions, fetcherAsync }
+export { getCurrentData, getOptions, fetcherAsync, useLocalStorage, getLocalStorageOrDefault }

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { useRouter } from "next/router";
-import { fetcherAsync } from "../../utils/handlers";
+import { fetcherAsync, getLocalStorageOrDefault } from "../../utils/handlers";
 import { useState } from 'react';
 import Error from '../404'
 import HomeIcon from './component/HomeSVG'
@@ -12,24 +12,26 @@ import Forecast from "./component/Forecast";
 import Animation from './component/Animation';
 import Modal from './component/ConfigModal';
 
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 export default function WeatherInfo() {
+  const storageData = getLocalStorageOrDefault('configs', {});
   const { query } = useRouter();
-  const lat = Number(query.lat);
-  const lon = Number(query.lon);
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useState(storageData);
+
+  let units;
   let reverseGeoURL;
   let oneCallURL;
 
-  if(typeof window !== "undefined"){
-    let userConfigs = window.sessionStorage.getItem('configs');
-    if (!isNaN(lat)) {
-      console.log(config)
-      const units = userConfigs.ud ? 'imperial' : 'metric';
-      reverseGeoURL =
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&units=${units}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
-      oneCallURL =
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
-    }
+  if (query.lat !== undefined) {
+    units = config.ud ? 'imperial' : 'metric'
+    reverseGeoURL =
+      `http://api.openweathermap.org/geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&limit=1&units=${units}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+    oneCallURL =
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${query.lat}&lon=${query.lon}&units=${units}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
   }
 
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
@@ -41,8 +43,12 @@ export default function WeatherInfo() {
       'country': cityData[0].country,
       'temperature': oneCallData.current.temp.toFixed(),
       'description': oneCallData.current.weather[0].description,
-      'sunrise': dayjs.unix(oneCallData.current.sunrise).format('HH:mm'),
-      'sunset': dayjs.unix(oneCallData.current.sunset).format('HH:mm'),
+      'sunrise':
+        (config.tz ? dayjs.unix(oneCallData.current.sunrise).tz(oneCallData.timezone).format((config.tf ? 'h:mm a' : 'HH:mm')) :
+          dayjs.unix(oneCallData.current.sunrise).format((config.tf ? 'h:mm a' : 'HH:mm'))),
+      'sunset':
+        (config.tz ? dayjs.unix(oneCallData.current.sunset).tz(oneCallData.timezone).format((config.tf ? 'h:mm a' : 'HH:mm')) :
+          dayjs.unix(oneCallData.current.sunset).format((config.tf ? 'h:mm a' : 'HH:mm'))),
       'pressure': oneCallData.current.pressure,
       'humidity': oneCallData.current.humidity,
       'iconSrc': oneCallData.current.weather[0].id,
@@ -51,16 +57,17 @@ export default function WeatherInfo() {
         'tz-offset': oneCallData.timezone_offset
       },
       'week-forecast': oneCallData.daily,
-      'hourly-forecast': oneCallData.hourly
+      'hourly-forecast': oneCallData.hourly,
+      'units': units
     }
 
     return (
       <>
         <div className='relative'>
-          <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description }} />
+          <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description, unit: cityInfo.units }} />
 
           <div className="flex mt-8  justify-center w-fit mx-auto">
-            <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset }} />
+            <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset, timezone: cityInfo.timezone }} />
             <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
           </div>
           <section className="mt-14 md:h-[800px] h-auto  mx-auto">
@@ -69,7 +76,7 @@ export default function WeatherInfo() {
                 cityInfo && cityInfo['week-forecast'].map((day, index) => {
                   return (
                     <div key={index} className={`py-4 ${index == 7 ? 'border-0' : 'border-b-2 border-slate-600'}`}>
-                      <Forecast day={day} />
+                      <Forecast props={{ day, unit: cityInfo.units }} />
                     </div>
                   )
                 })
@@ -78,7 +85,7 @@ export default function WeatherInfo() {
           </section>
           <section className='relative h-12 w-full my-5 md:m-0  md:absolute md:top-48'>
             <HomeIcon />
-            <Modal props={{ setConfig }} />
+            <Modal prop={{ updateSession: setConfig }} />
           </section>
         </div>
       </>

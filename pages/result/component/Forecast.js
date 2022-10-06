@@ -3,7 +3,8 @@ import { IconContext } from "react-icons";
 import { VscArrowSmallDown, VscArrowSmallUp } from 'react-icons/vsc'
 import Animation from './Animation'
 
-export default function Forecast({ day }) {
+export default function Forecast({ props }) {
+  const { day, unit } = props;
   const weatherID = day.weather[0].id;
   return (
     <section className="flex justify-between items-center">
@@ -26,8 +27,8 @@ export default function Forecast({ day }) {
           <IconContext.Provider value={{ size: '1.5em' }}>
             <VscArrowSmallDown />
             <p>{day.temp.min.toFixed()}
-              <span className="text-sm align-middle px-1">
-                °C
+              <span className="text-sm md:text-base align-middle px-1">
+                {unit === 'metric' ? '°C' : '°F'}
               </span>
             </p>
           </IconContext.Provider>
@@ -38,8 +39,8 @@ export default function Forecast({ day }) {
             <VscArrowSmallUp />
           </IconContext.Provider>
           <p>{day.temp.max.toFixed()}
-            <span className="text-sm align-middle px-1">
-              °C
+            <span className="text-sm md:text-base align-middle px-1 uppercase">
+              {unit === 'metric' ? '°c' : '°f'}
             </span>
           </p>
         </div>

@@ -1,8 +1,7 @@
 import SettingsBtn from "./SettingSVG"
 import Toggle from './Toggle'
 
-export default function Modal({ props }) {
-  const { config,setConfig } = props;
+export default function Modal({ prop }) {
 
   function applyConfigs() {
     document.getElementById('modal').style.display = 'none'
@@ -30,17 +29,17 @@ export default function Modal({ props }) {
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>timezone</span>
-            <Toggle prop={{id:'tz',handler:setConfig}}/>
+            <Toggle prop={{ id: 'tz', setter: prop.updateSession }} />
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>24/12</span>
-            <Toggle prop={{id:'tf',handler:setConfig}}/>
+            <Toggle prop={{ id: 'tf', setter: prop.updateSession }} />
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>°c/°f</span>
-            <Toggle prop={{id:'ud',handler:setConfig}}/>
+            <Toggle prop={{ id: 'ud', setter: prop.updateSession }} />
           </div>
 
         </div>

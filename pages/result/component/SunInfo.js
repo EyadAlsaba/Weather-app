@@ -2,6 +2,9 @@ import { WiHorizonAlt, WiHorizon } from "react-icons/wi";
 import { IconContext } from "react-icons";
 
 export default function SunInfo({ props }) {
+  const twintyFourRise = props.sunrise.trim().split(/\s+/);
+  const twintyFourSet = props.sunset.trim().split(/\s+/);
+
   return (
     <section>
       <div className="flex">
@@ -14,8 +17,8 @@ export default function SunInfo({ props }) {
           {
             props.sunrise.includes('m') ?
              <>
-             <p>{props.sunrise.slice(0,4)}</p>
-             <p>{props.sunrise.slice(4)}</p>
+             <p>{twintyFourRise[0]}</p>
+             <p>{twintyFourRise[1]}</p>
              </>
              :
              <p>{props.sunrise}</p>
@@ -30,8 +33,8 @@ export default function SunInfo({ props }) {
           {
             props.sunset.includes('m') ?
              <>
-             <p>{props.sunset.slice(0,4)}</p>
-             <p>{props.sunset.slice(4)}</p>
+             <p>{twintyFourSet[0]}</p>
+             <p>{twintyFourSet[1]}</p>
              </>
              :
              <p>{props.sunset}</p>

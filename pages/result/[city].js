@@ -35,7 +35,7 @@ export default function WeatherInfo() {
   }
 
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
-  const { data: oneCallData, error: oneCallDataError } = useSWR('/api/getPLH', fetcherAsync);
+  const { data: oneCallData, error: oneCallDataError } = useSWR(oneCallURL, fetcherAsync);
 
   if (oneCallData && cityData) {
     const cityInfo = {

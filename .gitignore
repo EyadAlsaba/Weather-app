@@ -34,6 +34,9 @@ yarn-error.log*
 #notes
 notes.txt
 
+#placeholder data
+#PLH.js
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

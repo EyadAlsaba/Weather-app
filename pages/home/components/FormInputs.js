@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { getData } from "../../../utils/handlers";
+import { useEffect, useState } from "react";
+import { getCurrentData, getOptions } from "../../../utils/handlers";
 import { useRouter } from "next/router";
 import SearchSVG from "./SearchSVG"
 import GeolocationBtn from "./Geolocation";
@@ -10,16 +10,17 @@ export default function Form() {
   const [city, setCity] = useState('');
   const [invalid, setInvalid] = useState(false);
   const [msg, setMsg] = useState('');
+  const [opt, setOpt] = useState(null);
 
   async function submitHandler(e) {
     e.preventDefault();
-    const docs = await getData(city);
+    const docs = await getCurrentData(city);
     if (docs === undefined) {
       setInvalid(true);
       setMsg('city name must not contain numbers, spaces, or character %$#@!*_^')
     } else {
       if (docs.cod === 200) {
-        router.push(`/result/${city}`);
+        router.push(`result/query?lat=${docs.coord.lat}&lon=${docs.coord.lon}`);
       }
       if (docs.cod === '404') {
         setInvalid(true);
@@ -28,6 +29,15 @@ export default function Form() {
     };
     setTimeout(() => setInvalid(false), 5000)
   }
+
+  useEffect(() => {
+    if (city.length !== 0) {
+      (async () => {
+        const options = await getOptions(city);
+        setOpt(options);
+      })()
+    }
+  }, [city])
 
   return (
     <>
@@ -48,6 +58,19 @@ export default function Form() {
             />
           </div>
         </form>
+        <div className="w-full">
+          {
+            (opt && city.length !== 0) && opt.map((option, index) => {
+              return (
+                <button className="w-full bg-grayMe text-blueMe border-b-4 py-1 hover:bg-blueMe hover:text-grayMe md:text-lg text-sm"
+                  key={index}
+                  onClick={() => router.push(`result/query?lat=${option.lat}&lon=${option.lon}`)}
+                >
+                  {option.name}, {option.state && `${option.state},`} {option.country}</button>
+              )
+            })
+          }
+        </div>
         <GeolocationBtn />
       </div>
     </>

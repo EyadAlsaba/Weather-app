@@ -70,7 +70,7 @@ export default function WeatherInfo() {
             <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset, timezone: cityInfo.timezone }} />
             <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
           </div>
-          <section className="mt-14 md:h-[800px] h-auto  mx-auto">
+          <section className="mt-14 md:h-[900px] h-auto  mx-auto">
             <div className="flex justify-center flex-col w-[90%] md:w-[75%] lg:w-[65%] mx-auto rounded-md text-white bg-blackBG px-5 ">
               {
                 cityInfo && cityInfo['week-forecast'].map((day, index) => {

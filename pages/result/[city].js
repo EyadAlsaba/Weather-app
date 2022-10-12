@@ -13,7 +13,7 @@ import Animation from './component/Animation';
 import Modal from './component/ConfigModal';
 
 const utc = require('dayjs/plugin/utc')
-const timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+const timezone = require('dayjs/plugin/timezone')
 dayjs.extend(utc);
 dayjs.extend(timezone);
 

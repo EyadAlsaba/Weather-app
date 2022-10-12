@@ -35,7 +35,7 @@ function inputValidator(query) {
 
 //This will return an Array of Objects (Options)
 async function getOptions(query) {
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}`
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}`
   const response = await fetch(url);
   const options = await response.json();
   return options

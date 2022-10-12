@@ -29,7 +29,7 @@ export default function WeatherInfo() {
   if (query.lat !== undefined) {
     units = config.ud ? 'imperial' : 'metric'
     reverseGeoURL =
-      `http://api.openweathermap.org/geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&limit=1&units=${units}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
+      `https://api.openweathermap.org/geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&limit=1&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
     oneCallURL =
       `https://api.openweathermap.org/data/3.0/onecall?lat=${query.lat}&lon=${query.lon}&units=${units}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
   }

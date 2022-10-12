@@ -6,10 +6,6 @@ export default function GeolocationBtn() {
   const router = useRouter();
   const [fail, setFail] = useState(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => setFail(false), 5000)
-  // }, []);
-
   function userGeolocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallBack);
@@ -21,10 +17,7 @@ export default function GeolocationBtn() {
   async function successCallback(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    const geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_API_KEY}`
-    const response = await fetch(geoUrl);
-    const data = await response.json();
-    router.push(`/result/${data.name}`)
+    router.push(`/result/query?lat=${lat}&lon=${lon}`);
   };
 
   function errorCallBack(error) {

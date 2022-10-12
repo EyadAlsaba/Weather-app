@@ -68,6 +68,12 @@ const fetcherAsync = async url => {
   }
 
   return res.json()
-}
+};
 
-export { getCurrentData, getOptions, fetcherAsync, useLocalStorage, getLocalStorageOrDefault }
+export {
+   getCurrentData,
+   getOptions,
+   fetcherAsync,
+   useLocalStorage,
+   getLocalStorageOrDefault
+  };

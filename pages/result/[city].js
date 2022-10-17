@@ -31,7 +31,7 @@ export default function WeatherInfo() {
     reverseGeoURL =
       `https://api.openweathermap.org/geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&limit=1&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
     oneCallURL =
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${query.lat}&lon=${query.lon}&units=${units}&exclude=minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${query.lat}&lon=${query.lon}&units=${units}&exclude=hourly,minutely&appid=${process.env.NEXT_PUBLIC_API_ONE_CALL}`;
   }
 
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
@@ -57,7 +57,6 @@ export default function WeatherInfo() {
         'tz-offset': oneCallData.timezone_offset
       },
       'week-forecast': oneCallData.daily,
-      'hourly-forecast': oneCallData.hourly,
       'units': units
     }
 
@@ -74,11 +73,13 @@ export default function WeatherInfo() {
             <div className="flex justify-center flex-col w-[90%] md:w-[75%] lg:w-[65%] mx-auto rounded-md text-white bg-blackBG px-5 ">
               {
                 cityInfo && cityInfo['week-forecast'].map((day, index) => {
-                  return (
-                    <div key={index} className={`py-4 ${index == 7 ? 'border-0' : 'border-b-2 border-slate-600'}`}>
-                      <Forecast props={{ day, unit: cityInfo.units }} />
-                    </div>
-                  )
+                  if (index > 0) {
+                    return (
+                      <div key={index} className={`py-4 ${index == 7 ? 'border-0' : 'border-b-2 border-slate-600'}`}>
+                        <Forecast props={{ day, unit: cityInfo.units }} />
+                      </div>
+                    )
+                  }
                 })
               }
             </div>

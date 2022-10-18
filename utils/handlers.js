@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 // Reference: https://typeofnan.dev/using-session-storage-in-react-with-hooks/
 function getLocalStorageOrDefault(key, defaultValue) {
   if (typeof window !== "undefined") {
@@ -33,7 +34,6 @@ function inputValidator(query) {
   }
 }
 
-//This will return an Array of Objects (Options)
 async function getOptions(query) {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}`
   const response = await fetch(url);

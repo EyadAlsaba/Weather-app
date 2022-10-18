@@ -1,8 +1,8 @@
 import Link from "next/link"
+
 export default function HomeIcon() {
   return (
     <Link href='/'>
-
       <div className="hover:cursor-pointer transition-[width] ease-linear duration-500 bg-blackBG rounded-full
        w-fit h-fit absolute right-0 bottom-0 mx-6 my-2 p-2 border-[1px] border-slate-700
       md:hover:w-12 md:m-0 md:w-9 md:rounded-r  md:text-start">

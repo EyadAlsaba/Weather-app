@@ -3,8 +3,8 @@ import { IconContext } from "react-icons";
 
 export default function SunInfo({ props }) {
   if(props !== undefined){
-    const twintyFourRise = props.sunrise.trim().split(/\s+/);
-    const twintyFourSet = props.sunset.trim().split(/\s+/);
+    const twentyFourRise = props.sunrise.trim().split(/\s+/);
+    const twentyFourSet = props.sunset.trim().split(/\s+/);
   
     return (
       <section>
@@ -18,8 +18,8 @@ export default function SunInfo({ props }) {
             {
               props.sunrise.includes('m') ?
                <>
-               <p>{twintyFourRise[0]}</p>
-               <p>{twintyFourRise[1]}</p>
+               <p>{twentyFourRise[0]}</p>
+               <p>{twentyFourRise[1]}</p>
                </>
                :
                <p>{props.sunrise}</p>
@@ -34,8 +34,8 @@ export default function SunInfo({ props }) {
             {
               props.sunset.includes('m') ?
                <>
-               <p>{twintyFourSet[0]}</p>
-               <p>{twintyFourSet[1]}</p>
+               <p>{twentyFourSet[0]}</p>
+               <p>{twentyFourSet[1]}</p>
                </>
                :
                <p>{props.sunset}</p>
@@ -45,6 +45,5 @@ export default function SunInfo({ props }) {
         </div>
       </section>
     )
-  
   }
 }

@@ -25,6 +25,5 @@ export default function HeaderInfo({ props }) {
         </section>
       </>
     )
-  
   }
 }

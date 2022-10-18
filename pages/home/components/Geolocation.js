@@ -6,10 +6,6 @@ export default function GeolocationBtn() {
   const router = useRouter();
   const [fail, setFail] = useState(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => setFail(false), 5000)
-  // }, []);
-
   function userGeolocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallBack);
@@ -21,7 +17,7 @@ export default function GeolocationBtn() {
   async function successCallback(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    router.push(`/result/query?lat=${lat}&lon=${lon}`)
+    router.push(`/result/query?lat=${lat}&lon=${lon}`);
   };
 
   function errorCallBack(error) {

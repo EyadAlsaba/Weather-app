@@ -1,5 +1,3 @@
-
-import Link from "next/link"
 export default function SettingsBtn() {
   return (
     <div className="hover:cursor-pointer transition-[width] ease-linear duration-500 bg-blackBG rounded-full

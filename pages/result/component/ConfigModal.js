@@ -17,7 +17,7 @@ export default function Modal({ prop }) {
   
         <section id='modal' className="text-white fixed z-10 w-full h-full bg-slate-500 top-0 left-0 hidden">
   
-          <div id='modal-content' className="flex flex-col justify-center w-[80%] lg:w-[35%] md:w-[50%] mt-[50%] mx-auto p-5 rounded-lg md:mt-[25%] lg:mt-[15%] bg-slate-400 drop-shadow-lg">
+          <div id='modal-content' className="flex flex-col justify-center w-[80%] lg:w-[35%] md:w-[50%] mx-auto p-5 rounded-lg relative md:top-[25%] lg:top-[15%] top-[35%] bg-slate-400 drop-shadow-lg">
   
             <button onClick={() => {
               document.getElementById('modal').style.display = 'none'
@@ -29,23 +29,23 @@ export default function Modal({ prop }) {
   
             <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
               <span>timezone</span>
-              <Toggle prop={{ id: 'tz', setter: prop.updateSession }} />
+              <Toggle prop={{ id: 'tz', setter: prop.updateStorage }} />
             </div>
   
             <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
               <span>24/12</span>
-              <Toggle prop={{ id: 'tf', setter: prop.updateSession }} />
+              <Toggle prop={{ id: 'tf', setter: prop.updateStorage }} />
             </div>
   
             <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
               <span>°c/°f</span>
-              <Toggle prop={{ id: 'ud', setter: prop.updateSession }} />
+              <Toggle prop={{ id: 'ud', setter: prop.updateStorage }} />
             </div>
-  
-          </div>
-  
-          <div className="w-full text-center mt-3 drop-shadow-lg">
-            <button onClick={() => applyConfigs()} className='bg-slate-800 p-1 tracking-wide rounded-lg hover:text-slate-800 hover:bg-white w-20'>Apply</button>
+              
+            <div className="w-full text-center drop-shadow-lg mt-10">
+              <button onClick={() => applyConfigs()} className='bg-slate-800 p-1 tracking-wide rounded-lg hover:text-slate-800 hover:bg-white w-20'>Apply</button>
+            </div>
+
           </div>
         </section>
       </>

@@ -83,7 +83,7 @@ export default function WeatherInfo() {
               }
             </div>
           </section>
-          <section className='relative h-12 w-full my-5 md:m-0  md:absolute md:top-48'>
+          <section className='w-full absolute top-40'>
             <HomeIcon />
             <Modal prop={{ updateStorage: setConfig }} />
           </section>

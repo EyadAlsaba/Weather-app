@@ -1,4 +1,4 @@
-export default function GeolocationSVG() {
+export default function Geolocation() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4  h-4 md:w-6 md:h-6  stroke-grayMe ">
       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />

@@ -1,4 +1,4 @@
-import GeolocationSVG from "./GeoLocSVG"
+import Geolocation from "./svg/Geolocation"
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -10,7 +10,7 @@ export default function GeolocationBtn() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallBack);
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      window.alert("Geolocation is not supported by this browser.");
     }
   }
 
@@ -31,7 +31,7 @@ export default function GeolocationBtn() {
     <>
       <div className="bg-blueMe py-3 rounded-b flex flex-row transition-all delay-200 hover:opacity-75 ">
         <div className="w-8 ml-4">
-          <GeolocationSVG />
+          <Geolocation />
         </div>
         <button className="capitalize text-grayMe md:text-lg text-sm  w-full text-start"
           onClick={() => userGeolocation()}

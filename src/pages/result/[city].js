@@ -1,16 +1,18 @@
 import useSWR from 'swr';
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { fetcherAsync, getLocalStorageOrDefault } from "../../utils/handlers";
 import { useState } from 'react';
 import Error from '../404'
-import HomeIcon from './component/HomeSVG'
-import dayjs from "dayjs";
-import HumidityAndPressure from './component/HumidityAndPressure';
-import SunInfo from './component/SunInfo';
-import HeaderInfo from './component/HeaderInfo';
-import Forecast from "./component/Forecast";
-import Animation from './component/Animation';
-import Modal from './component/ConfigModal';
+import {
+  HomeBtn,
+  HumidityAndPressure,
+  SunInfo,
+  HeaderInfo,
+  Forecast,
+  Animation,
+  Modal,
+} from '../../components'
 
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
@@ -26,7 +28,7 @@ export default function WeatherInfo() {
   let reverseGeoURL;
   let oneCallURL;
 
-  if (query.lat !== undefined) {
+  if (query.lat) {
     units = config.ud ? 'imperial' : 'metric'
     reverseGeoURL =
       `https://api.openweathermap.org/geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&limit=1&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
@@ -68,7 +70,7 @@ export default function WeatherInfo() {
             <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset, timezone: cityInfo.timezone }} />
             <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
           </div>
-          <section className="mt-14 md:h-[800px] h-auto  mx-auto">
+          <section className="mt-14 h-[850px]  mx-auto">
             <div className="flex justify-center flex-col w-[90%] md:w-[75%] lg:w-[65%] mx-auto rounded-md text-white bg-blackBG px-5 ">
               {
                 cityInfo && cityInfo['week-forecast'].map((day, index) => {
@@ -84,7 +86,7 @@ export default function WeatherInfo() {
             </div>
           </section>
           <section className='w-full absolute top-40'>
-            <HomeIcon />
+            <HomeBtn />
             <Modal prop={{ updateStorage: setConfig }} />
           </section>
         </div>

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { getCurrentData, getOptions } from "../../../utils/handlers";
+import { useEffect, useState, useContext } from "react";
+import { DataContext } from "../utils/helpers";
+import { getCurrentData, getOptions } from "../utils/handlers";
 import { useRouter } from "next/router";
-import SearchSVG from "./SearchSVG"
-import GeolocationBtn from "./Geolocation";
+import Search from "./svg/Search"
+import GeolocationBtn from "./GeolocationBtn";
 
 export default function Form() {
-
+  const { setCoords } = useContext(DataContext)
   const router = useRouter();
   const [city, setCity] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -48,7 +49,7 @@ export default function Form() {
         <form onSubmit={submitHandler}>
           <div className="bg-grayMe py-3 rounded-t flex flex-row">
             <div className="w-8 ml-4">
-              <SearchSVG />
+              <Search />
             </div>
             <input type='text'
               placeholder="city name"

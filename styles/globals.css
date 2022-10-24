@@ -17,7 +17,7 @@ html,
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  background-color: rgb(71 85 105);
+  /*background-color: rgb(71 85 105);*/
 }
 
 * {

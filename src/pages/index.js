@@ -1,4 +1,4 @@
-import Form from "./home/components/FormInputs.js"
+import { Form } from "../components"
 import { useLocalStorage } from "../utils/handlers.js";
 
 export default function HomePage() {

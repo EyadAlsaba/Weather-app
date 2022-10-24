@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { DataContext } from "../utils/helpers";
 import { getCurrentData, getOptions } from "../utils/handlers";
 import { useRouter } from "next/router";
 import Search from "./svg/Search"
 import GeolocationBtn from "./GeolocationBtn";
 
 export default function Form() {
-
+  const { setCoords } = useContext(DataContext)
   const router = useRouter();
   const [city, setCity] = useState('');
   const [invalid, setInvalid] = useState(false);

@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getLocalStorageOrDefault } from "../utils/handlers";
+import { DataContext } from "../utils/helpers"
 
-export default function Toggle({ prop }) {
-
+export default function Toggle({ id }) {
+  const { setConfig } = useContext(DataContext)
   const isConfiged = getLocalStorageOrDefault('configs', {})
   const [options, setoptions] = useState(isConfiged);
 
-  if (!prop) return;
-
   function clickHandler() {
     const userConfig = { ...isConfiged }
-    userConfig[prop.id] = !options[prop.id];
+    userConfig[id] = !options[id];
     localStorage.setItem('configs', JSON.stringify(userConfig));
     setoptions(userConfig)
-    prop.setter(userConfig)
+    setConfig(userConfig)
   }
 
   return (
@@ -23,7 +22,7 @@ export default function Toggle({ prop }) {
           <input
             type="checkbox"
             className="sr-only peer"
-            checked={options[prop.id]}
+            checked={options[id]}
             readOnly
             onClick={() => {
               clickHandler()

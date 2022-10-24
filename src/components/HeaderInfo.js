@@ -5,7 +5,7 @@ export default function HeaderInfo({ props }) {
 
   return (
     <>
-      <section className="mt-10">
+      <section className="pt-10">
         <h1 className=" bg-blackBG  text-white mx-auto p-3 rounded h-fit w-fit text-2xl  md:text-3xl tracking-normal text-center">
           {props.name} | {props.country}
         </h1>

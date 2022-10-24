@@ -2,12 +2,11 @@ import SettingsBtn from "./SettingBtn"
 import Close from "./svg/Close"
 import Toggle from './Toggle'
 
-export default function Modal({ prop }) {
+export default function Modal() {
   function applyConfigs() {
     document.getElementById('modal').style.display = 'none'
   };
 
-  if (!prop) return;
   return (
     <>
       <button id='modalBtn' onClick={() => {
@@ -28,17 +27,17 @@ export default function Modal({ prop }) {
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>timezone</span>
-            <Toggle prop={{ id: 'tz', setter: prop.updateStorage }} />
+            <Toggle id='tz' />
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>24/12</span>
-            <Toggle prop={{ id: 'tf', setter: prop.updateStorage }} />
+            <Toggle id='tf' />
           </div>
 
           <div className="flex justify-between align-middle py-2 uppercase  md:text-lg text-sm drop-shadow-lg">
             <span>°c/°f</span>
-            <Toggle prop={{ id: 'ud', setter: prop.updateStorage }} />
+            <Toggle id='ud' />
           </div>
 
           <div className="w-full text-center drop-shadow-lg mt-10">

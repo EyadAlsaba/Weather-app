@@ -17,6 +17,13 @@ module.exports = {
       },
       backgroundImage: {
         homePage: 'url("https://weather-app-eyadalsaba.vercel.app/homePageBackground.jpg")',
+        Clouds: 'url("https://weather-app-eyadalsaba.vercel.app/Clouds.jpg")',
+        Rain: 'url("https://weather-app-eyadalsaba.vercel.app/Rain.jpg")',
+        Clear: 'url("https://weather-app-eyadalsaba.vercel.app/Clear.jpg")',
+        Foggy: 'url("https://weather-app-eyadalsaba.vercel.app/Foggy.jpg")',
+        Mist: 'url("https://weather-app-eyadalsaba.vercel.app/Foggy.jpg")',
+        Snow: 'url("https://weather-app-eyadalsaba.vercel.app/Snow.jpg")',
+        Thunderstorm: 'url("https://weather-app-eyadalsaba.vercel.app/Thunderstorm.jpg")'
       }
     },
   },

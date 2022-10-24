@@ -8,7 +8,7 @@ export default function HumidityAndPressure({ props }) {
     <section>
       <div className="flex">
 
-        <div className="lg:w-24 lg:h-24 lg:text-xl md:w-16 md:h-16 md:text-sm border-[1px] border-slate-700
+        <div className="lg:w-24 lg:h-24 lg:text-xl md:w-16 md:h-16 md:text-sm
           rounded-full flex flex-col justify-center items-center text-white bg-blackBG mx-1 w-16 h-16 text-xs">
           <IconContext.Provider value={{ size: '1.4rem' }}>
             <WiHumidity />
@@ -18,7 +18,7 @@ export default function HumidityAndPressure({ props }) {
           </p>
         </div>
 
-        <div className="lg:w-24 lg:h-24 lg:text-xl md:w-16 md:h-16 md:text-sm border-[1px] border-slate-700
+        <div className="lg:w-24 lg:h-24 lg:text-xl md:w-16 md:h-16 md:text-sm
           rounded-full flex flex-col justify-center items-center text-white bg-blackBG mx-1 w-16 h-16 text-xs">
           <IconContext.Provider
             value={{ size: '1.4rem' }}>

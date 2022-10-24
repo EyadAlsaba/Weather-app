@@ -32,6 +32,16 @@ const DataProvider = ({ children }) => {
   const { data: cityData, error: cityDataError } = useSWR(reverseGeoURL, fetcherAsync);
   const { data: oneCallData, error: oneCallDataError } = useSWR(oneCallURL, fetcherAsync);
 
+  const imagesUrl = {
+    Clouds: 'url("/Clouds.jpg")',
+    Rain: 'url("/Rain.jpg")',
+    Clear: 'url("/Clear.jpg")',
+    Foggy: 'url("/Foggy.jpg")',
+    Mist: 'url("/Foggy.jpg")',
+    Snow: 'url("/Snow.jpg")',
+    Thunderstorm: 'url("/Thunderstorm.jpg")'
+  };
+
   if (oneCallData && cityData) {
     cityInfo = {
       'cityName': cityData[0].name,
@@ -52,7 +62,7 @@ const DataProvider = ({ children }) => {
       },
       'week-forecast': oneCallData.daily.filter((day, index) => index !== 0 ? day : false),
       'units': units,
-      'bgKeyName': oneCallData.current.weather[0].main
+      'backGroundImage': imagesUrl[`${oneCallData.current.weather[0].main}`]
     };
   }
 

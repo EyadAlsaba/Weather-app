@@ -36,10 +36,12 @@ const DataProvider = ({ children }) => {
     Clouds: "/Clouds.jpg",
     Rain: "/Rain.jpg",
     Clear: "/Clear.jpg",
-    Foggy: "/Foggy.jpg",
-    Mist: "/Foggy.jpg",
     Snow: "/Snow.jpg",
-    Thunderstorm: "/Thunderstorm.jpg"
+    Thunderstorm: "/Thunderstorm.jpg",
+    Fog: "/Foggy.jpg",
+    Mist: "/Foggy.jpg",
+    Dust: "/Foggy.jpg",
+    Tornado: "/Foggy.jpg"
   };
 
   if (oneCallData && cityData) {

@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { DataContext } from "../../utils/helpers"
 import Error from '../404'
+import Image from 'next/image';
+
 
 import {
   HomeBtn,
@@ -22,8 +24,18 @@ export default function WeatherInfo() {
   if (cityInfo) {
     return (
       <div className='relative'>
-        <div className='bg-cover bg-no-repeat w-full h-full fixed left-0 top-0 brightness-75 blur-sm z-[-5]' style={{ backgroundImage: `${cityInfo.backGroundImage}` }}>
-        </div>
+        <Image
+          src={`${cityInfo.backGroundImage}`}
+          alt='background image'
+          objectFit='cover'
+          objectPosition='center'
+          className='z-[-5] brightness-90 blur-sm '
+          layout='fill'
+          placeholder='blur'
+          blurDataURL='data'
+          priority
+        />
+
         <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description, unit: cityInfo.units }} />
 
         <div className="flex mt-8  justify-center w-fit mx-auto">

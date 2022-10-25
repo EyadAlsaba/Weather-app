@@ -33,13 +33,13 @@ const DataProvider = ({ children }) => {
   const { data: oneCallData, error: oneCallDataError } = useSWR(oneCallURL, fetcherAsync);
 
   const imagesUrl = {
-    Clouds: 'url("/Clouds.jpg")',
-    Rain: 'url("/Rain.jpg")',
-    Clear: 'url("/Clear.jpg")',
-    Foggy: 'url("/Foggy.jpg")',
-    Mist: 'url("/Foggy.jpg")',
-    Snow: 'url("/Snow.jpg")',
-    Thunderstorm: 'url("/Thunderstorm.jpg")'
+    Clouds: "/Clouds.jpg",
+    Rain: "/Rain.jpg",
+    Clear: "/Clear.jpg",
+    Foggy: "/Foggy.jpg",
+    Mist: "/Foggy.jpg",
+    Snow: "/Snow.jpg",
+    Thunderstorm: "/Thunderstorm.jpg"
   };
 
   if (oneCallData && cityData) {

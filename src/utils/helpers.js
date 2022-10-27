@@ -34,14 +34,23 @@ const DataProvider = ({ children }) => {
 
   const imagesUrl = {
     Clouds: "/Clouds.jpg",
+    S_Clouds:"/Clear Small.png",
     Rain: "/Rain.jpg",
+    S_Rain:"/Rain Small.png",
     Clear: "/Clear.jpg",
+    S_Clear:"/Clear Small.png",
     Snow: "/Snow.jpg",
+    S_Snow:"/Snow Small.png",
     Thunderstorm: "/Thunderstorm.jpg",
+    S_Thunderstorm:"/Thunderstorm Small.png",
     Fog: "/Foggy.jpg",
+    S_Fog:"/Fog Small.png",
     Mist: "/Foggy.jpg",
+    S_Mist:"/Foggy Small.png",
     Dust: "/Foggy.jpg",
-    Tornado: "/Foggy.jpg"
+    S_Dust:"/Foggy Small.png",
+    Tornado: "/Foggy.jpg",
+    S_Tornado:"/Foggy Small.png"
   };
 
   if (oneCallData && cityData) {
@@ -64,7 +73,8 @@ const DataProvider = ({ children }) => {
       },
       'week-forecast': oneCallData.daily.filter((day, index) => index !== 0 ? day : false),
       'units': units,
-      'backGroundImage': imagesUrl[`${oneCallData.current.weather[0].main}`]
+      'backGroundImage': imagesUrl[`${oneCallData.current.weather[0].main}`],
+      'backgroundPlaceholder':imagesUrl[`S_${oneCallData.current.weather[0].main}`]
     };
   }
 

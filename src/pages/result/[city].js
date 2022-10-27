@@ -32,8 +32,7 @@ export default function WeatherInfo() {
           className='z-[-5] brightness-90 blur-sm '
           layout='fill'
           placeholder='blur'
-          blurDataURL='data'
-          priority
+          blurDataURL={`${cityInfo.backgroundPlaceholder}`}
         />
 
         <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description, unit: cityInfo.units }} />

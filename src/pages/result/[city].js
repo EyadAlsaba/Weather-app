@@ -23,8 +23,8 @@ export default function WeatherInfo() {
 
   if (cityInfo) {
     return (
-      <div className='relative h-full'>
-         <Image
+      <div className='relative'>
+        <Image
           src={`${cityInfo.backGroundImage}`}
           alt='background image'
           objectFit='cover'
@@ -33,9 +33,9 @@ export default function WeatherInfo() {
           layout='fill'
           placeholder='blur'
           blurDataURL={`${cityInfo.backgroundPlaceholder}`}
-        /> 
+        />
 
-         <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description, unit: cityInfo.units }} />
+        <HeaderInfo props={{ name: cityInfo.cityName, country: cityInfo.country, icon: cityInfo.iconSrc, temp: cityInfo.temperature, desc: cityInfo.description, unit: cityInfo.units }} />
 
         <div className="flex mt-8  justify-center w-fit mx-auto">
           <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset, timezone: cityInfo.timezone }} />
@@ -57,7 +57,7 @@ export default function WeatherInfo() {
         <section className='w-full absolute top-40'>
           <HomeBtn />
           <Modal />
-        </section> 
+        </section>
       </div>
     )
   } else if (cityDataError || oneCallDataError) {
@@ -67,8 +67,8 @@ export default function WeatherInfo() {
   } else {
     return (
       <div className="h-full w-full bg-loadingBg">
-        <div className='pt-[25%]'>
-        <Animation animationProps={{ id: 100, w: 300, h: 300 }} /> 
+        <div className='relative top-[25%]'>
+          <Animation animationProps={{ id: 100, w: 300, h: 300 }} />
         </div>
       </div>
     )

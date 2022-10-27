@@ -16,10 +16,10 @@
 html,
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
-  /*background-color: rgb(71 85 105);*/
 }
-
+body, #__next{
+  height: 100vh;
+}
 * {
   box-sizing: border-box;
   padding: 0;

@@ -17,6 +17,7 @@ module.exports = {
       },
       backgroundImage: {
         homePage: 'url("https://weather-app-eyadalsaba.vercel.app/homePageBackground.jpg")',
+        loadingBg:'url("/loadingBg.svg")'
       }
     },
   },

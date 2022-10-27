@@ -34,7 +34,7 @@ export default function Animation({ animationProps }) {
 
   return (
     <>
-      <div id={`${placeholder}`} className="md:mx-1 bg-blackBG rounded-full p-[1px]">
+      <div id={`${placeholder}`} className="md:mx-1 p-[1px]">
         <Lottie
           options={defaultOptions}
           height={h}

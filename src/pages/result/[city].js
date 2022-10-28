@@ -23,7 +23,7 @@ export default function WeatherInfo() {
 
   if (cityInfo) {
     return (
-      <div className='relative h-full'>
+      <div className='relative h-[100%]'>
          <Image
           src={`${cityInfo.backGroundImage}`}
           alt='background image'

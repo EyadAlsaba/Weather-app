@@ -34,23 +34,23 @@ const DataProvider = ({ children }) => {
 
   const imagesUrl = {
     Clouds: "/Clouds.jpg",
-    S_Clouds:"/Clear Small.png",
+    S_Clouds: "/Clouds Small.png",
     Rain: "/Rain.jpg",
-    S_Rain:"/Rain Small.png",
+    S_Rain: "/Rain Small.png",
     Clear: "/Clear.jpg",
-    S_Clear:"/Clear Small.png",
+    S_Clear: "/Clear Small.png",
     Snow: "/Snow.jpg",
-    S_Snow:"/Snow Small.png",
+    S_Snow: "/Snow Small.png",
     Thunderstorm: "/Thunderstorm.jpg",
-    S_Thunderstorm:"/Thunderstorm Small.png",
+    S_Thunderstorm: "/Thunderstorm Small.png",
     Fog: "/Foggy.jpg",
-    S_Fog:"/Fog Small.png",
+    S_Fog: "/Foggy Small.png",
     Mist: "/Foggy.jpg",
-    S_Mist:"/Foggy Small.png",
+    S_Mist: "/Foggy Small.png",
     Dust: "/Foggy.jpg",
-    S_Dust:"/Foggy Small.png",
+    S_Dust: "/Foggy Small.png",
     Tornado: "/Foggy.jpg",
-    S_Tornado:"/Foggy Small.png"
+    S_Tornado: "/Foggy Small.png"
   };
 
   if (oneCallData && cityData) {
@@ -74,7 +74,7 @@ const DataProvider = ({ children }) => {
       'week-forecast': oneCallData.daily.filter((day, index) => index !== 0 ? day : false),
       'units': units,
       'backGroundImage': imagesUrl[`${oneCallData.current.weather[0].main}`],
-      'backgroundPlaceholder':imagesUrl[`S_${oneCallData.current.weather[0].main}`]
+      'backgroundPlaceholder': imagesUrl[`S_${oneCallData.current.weather[0].main}`]
     };
   }
 

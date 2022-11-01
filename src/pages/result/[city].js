@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { DataContext } from "../../utils/helpers"
 import Error from '../404'
 import Image from 'next/image';
-
+import LineCharts from '../../components/LineCharts';
 
 import {
   HomeBtn,
@@ -23,8 +23,8 @@ export default function WeatherInfo() {
 
   if (cityInfo) {
     return (
-      <div className='relative'>
-         <Image
+      <div className='relative lg:h-[2100px] h-[1700px]'>
+        <Image
           src={`${cityInfo.backGroundImage}`}
           alt='background image'
           objectFit='cover'
@@ -41,12 +41,12 @@ export default function WeatherInfo() {
           <SunInfo props={{ sunrise: cityInfo.sunrise, sunset: cityInfo.sunset, timezone: cityInfo.timezone }} />
           <HumidityAndPressure props={{ humidity: cityInfo.humidity, pressure: cityInfo.pressure }} />
         </div>
-        <section className="mt-14 h-[900px]  mx-auto">
+        <section className="mt-14 mx-auto">
           <div className="flex justify-center flex-col w-[90%] md:w-[75%] lg:w-[65%] mx-auto rounded-md text-white bg-blackBG px-5 ">
             {
               cityInfo && cityInfo['week-forecast'].map((day, index) => {
                 return (
-                  <div key={index} className={`py-4 ${index == 6 ? 'border-0' : 'border-b-2 border-slate-600'}`}>
+                  <div key={index} className={`py-4 ${index == 6 ? 'border-0' : 'border-b-2 border-slate-300'}`}>
                     <Forecast props={{ day, unit: cityInfo.units }} />
                   </div>
                 )
@@ -54,7 +54,8 @@ export default function WeatherInfo() {
             }
           </div>
         </section>
-        <section className='w-full absolute top-40'>
+        <LineCharts />
+        <section className='w-full absolute top-44'>
           <HomeBtn />
           <Modal />
         </section>

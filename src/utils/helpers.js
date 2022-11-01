@@ -20,6 +20,7 @@ const DataProvider = ({ children }) => {
   let reverseGeoURL;
   let oneCallURL;
   let cityInfo;
+  let chartsData;
 
   if (query.hasOwnProperty('lat')) {
     units = config.ud ? 'imperial' : 'metric'
@@ -76,11 +77,17 @@ const DataProvider = ({ children }) => {
       'backGroundImage': imagesUrl[`${oneCallData.current.weather[0].main}`],
       'backgroundPlaceholder': imagesUrl[`S_${oneCallData.current.weather[0].main}`]
     };
+    chartsData = {
+      min: oneCallData.daily.map(day => day.temp.min).filter((value, index) => index > 0 ? value : false),
+      max: oneCallData.daily.map(day => day.temp.max).filter((value, index) => index > 0 ? value : false),
+      labels: oneCallData.daily.map(day => dayjs.unix(day.dt).format('ddd')).filter((value, index) => index > 0 ? value : false)
+    }
   }
 
 
   return (
     <DataContext.Provider value={{
+      chartsData,
       cityDataError,
       oneCallDataError,
       setConfig,
